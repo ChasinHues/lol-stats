@@ -1,5 +1,5 @@
 import React from 'react'
-import MatchSummary from './MatchSummary'
+import MatchSummary from '../components/MatchSummary'
 
 function MatchHistory() {
     const matches = []

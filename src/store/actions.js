@@ -19,6 +19,7 @@ function receiveSummoner(summoner) {
 }
 
 export function fetchSummoner(name) {
+    console.log('fetchSummoner', name)
     return function(dispatch) {
         dispatch(requestSummoner())
         return getSummonerByName(name)

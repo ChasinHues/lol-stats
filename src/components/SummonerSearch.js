@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import LsTextInput from '../components/LsTextInput'
 import LsButton from '../components/LsButton'
-import { fetchSummoner } from '../store/actions'
 
 function SummonerSearch({ dispatch }) {
     let [summonerName, setSummonerName] = useState('')
+    const history = useHistory()
 
     function handleSummonerSearch(name) {
-        dispatch(fetchSummoner(name))
+        const urlEncodedName = encodeURI(name)
+        history.push('/summoner/' + urlEncodedName)
     }
 
     function handleChange(e) {
@@ -36,4 +37,4 @@ function SummonerSearch({ dispatch }) {
     )
 }
 
-export default connect()(SummonerSearch)
+export default SummonerSearch

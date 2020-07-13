@@ -1,18 +1,18 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import SidebarAndContentLayout from './components/SidebarAndContentLayout'
-import SummonerSummary from './components/SummonerSummary'
-import SummonerStatistics from './components/SummonerStatistics'
+import Home from './containers/Home'
+import SummonerApp from './containers/SummonerApp'
 
 function App() {
   return (
     <div className="bg-gray-100">
       <Header />
-      <SidebarAndContentLayout
-        sidebar={<SummonerSummary />}
-        content={<SummonerStatistics />}
-      />
+      <Router>
+        <Route path="/" exact component={Home} />
+        <Route path="/summoner/:summonerName" component={SummonerApp} />
+      </Router>
       <Footer />
     </div>
   );
