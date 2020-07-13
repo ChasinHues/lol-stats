@@ -8,11 +8,22 @@ import {
 // REDUCERS
 // Reducers specify how the application's state changes in response to actions sent to the store. 
 const initialState = {
-    selectedSummoner: null,
-    matchListReference: [],
-    matchListDetail: [],
-    matchListTimeLine: [],
-    isLoading: false
+    selectedSummoner: {
+        isLoading: false,
+        data: null
+    },
+    matchListReference: {
+        isLoading: false,
+        data: []
+    },
+    matchListDetail: {
+        isLoading: false,
+        data: []
+    },
+    matchListTimeLine: {
+        isLoading: false,
+        data: []
+    }
 }
 
 function reducer (state = initialState, action) {
@@ -20,23 +31,38 @@ function reducer (state = initialState, action) {
         case SUMMONER_REQUESTED:
             return {
                 ...state,
-                isLoading: true
+                selectedSummoner: {
+                    data: null,
+                    isLoading: true
+                },
+                matchListReference: {
+                    data: [],
+                    isLoading: true
+                }
             }
         case SUMMONER_RECEIVED:
             return {
                 ...state,
-                selectedSummoner: action.summoner,
-                isLoading: false
+                selectedSummoner: {
+                    data: action.summoner,
+                    isLoading: false
+                }
             }
         case MATCHLIST_REQUESTED:
             return {
                 ...state,
-                isLoading: true
+                matchListReference: {
+                    data: [],
+                    isLoading: true
+                }
             }
         case MATCHLIST_RECEIVED:
             return {
                 ...state,
-                matchListReference: action.matchlist
+                matchListReference: {
+                    data: action.matchlist,
+                    isLoading: false
+                }
             }
         default:
             return state

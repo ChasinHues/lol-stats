@@ -1,16 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Card from './Card'
+import Loading from './Loading'
 
 //http://ddragon.leagueoflegends.com/cdn/10.14.1/img/profileicon/${getSummoner.profileIconId}.png
 
 function mapState(state) {
     return {
-        summoner: state.selectedSummoner
+        summoner: state.selectedSummoner.data,
+        isLoading: state.selectedSummoner.isLoading
     }
 }
 
-function SummonerSummary({ summoner }) {
+function SummonerSummary({ summoner, isLoading }) {
     let profileImage = ''
     let summonerName = ''
     let summonerLevel = ''
@@ -23,6 +25,7 @@ function SummonerSummary({ summoner }) {
 
     return (
         <Card>
+            {isLoading && <Loading />}
             {profileImage}
             {summonerName}
             {summonerLevel}

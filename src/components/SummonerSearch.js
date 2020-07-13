@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import LsTextInput from '../components/LsTextInput'
 import LsButton from '../components/LsButton'
 
-function SummonerSearch({ dispatch }) {
+function SummonerSearch() {
     let [summonerName, setSummonerName] = useState('')
     const history = useHistory()
 
