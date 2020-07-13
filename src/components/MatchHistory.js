@@ -1,9 +1,8 @@
 import React from 'react'
-import { getMatchList } from '../lol-data'
 import MatchSummary from './MatchSummary'
 
 function MatchHistory() {
-    const matches = getMatchList.matches.slice(0, 10)
+    const matches = []
 
     return (
         <div>

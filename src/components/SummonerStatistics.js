@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from './Card'
 import MatchHistory from './MatchHistory'
-import SummonerSearch from './SummonerSearch'
+import SummonerSearch from '../container/SummonerSearch'
 
 function SummonerStatistics() {
     return (

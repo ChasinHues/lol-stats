@@ -1,15 +1,33 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Card from './Card'
-import { getSummoner } from '../lol-data'
 
-function SummonerSummary() {
+//http://ddragon.leagueoflegends.com/cdn/10.14.1/img/profileicon/${getSummoner.profileIconId}.png
+
+function mapState(state) {
+    return {
+        summoner: state.selectedSummoner
+    }
+}
+
+function SummonerSummary({ summoner }) {
+    let profileImage = ''
+    let summonerName = ''
+    let summonerLevel = ''
+
+    if(summoner !== null) {
+        profileImage = <img src={`http://ddragon.leagueoflegends.com/cdn/10.14.1/img/profileicon/${summoner.profileIconId}.png`} />
+        summonerName = <h2>{summoner.name}</h2>
+        summonerLevel = <p>Level {summoner.summonerLevel}</p>
+    }
+
     return (
         <Card>
-            <img src={`http://ddragon.leagueoflegends.com/cdn/10.14.1/img/profileicon/${getSummoner.profileIconId}.png`} />
-            <h1 className="text-4xl font-bold">{getSummoner.name}</h1>
-            <span>Level {getSummoner.summonerLevel}</span>
+            {profileImage}
+            {summonerName}
+            {summonerLevel}
         </Card>
     )
 }
 
-export default SummonerSummary
+export default connect(mapState)(SummonerSummary)
