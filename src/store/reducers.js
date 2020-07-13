@@ -1,4 +1,9 @@
-import { SUMMONER_REQUESTED, SUMMONER_RECEIVED} from './actions'
+import { 
+    SUMMONER_REQUESTED, 
+    SUMMONER_RECEIVED,
+    MATCHLIST_REQUESTED, 
+    MATCHLIST_RECEIVED
+} from './actions'
 
 // REDUCERS
 // Reducers specify how the application's state changes in response to actions sent to the store. 
@@ -22,6 +27,16 @@ function reducer (state = initialState, action) {
                 ...state,
                 selectedSummoner: action.summoner,
                 isLoading: false
+            }
+        case MATCHLIST_REQUESTED:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case MATCHLIST_RECEIVED:
+            return {
+                ...state,
+                matchListReference: action.matchlist
             }
         default:
             return state

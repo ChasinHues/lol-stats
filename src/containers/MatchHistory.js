@@ -1,8 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import MatchSummary from '../components/MatchSummary'
 
-function MatchHistory() {
-    const matches = []
+const mapState = (state) => {
+    return {
+        matches: state.matchListReference
+    }
+}
+
+function MatchHistory({ matches }) {
 
     return (
         <div>
@@ -15,4 +21,4 @@ function MatchHistory() {
     )
 }
 
-export default MatchHistory
+export default connect(mapState)(MatchHistory)
