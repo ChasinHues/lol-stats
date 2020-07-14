@@ -19,7 +19,7 @@ const champions = Object.keys(championsObj).map(i => championsObj[i])
 
 function MatchSummary(props) {
     const champion = champions.find(c => {
-        return c.key == props.match.champion
+        return +c.key === props.match.champion
     })
 
     return (

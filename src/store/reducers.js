@@ -2,7 +2,8 @@ import {
     SUMMONER_REQUESTED, 
     SUMMONER_RECEIVED,
     MATCHLIST_REQUESTED, 
-    MATCHLIST_RECEIVED
+    MATCHLIST_RECEIVED,
+    REQUEST_SUMMONER_AND_MATCHLIST
 } from './actions'
 
 // REDUCERS
@@ -12,15 +13,7 @@ const initialState = {
         isLoading: false,
         data: null
     },
-    matchListReference: {
-        isLoading: false,
-        data: []
-    },
-    matchListDetail: {
-        isLoading: false,
-        data: []
-    },
-    matchListTimeLine: {
+    matches: {
         isLoading: false,
         data: []
     }
@@ -35,9 +28,9 @@ function reducer (state = initialState, action) {
                     data: null,
                     isLoading: true
                 },
-                matchListReference: {
-                    data: [],
-                    isLoading: true
+                matches: {
+                    ...state.matches,
+                    data: []
                 }
             }
         case SUMMONER_RECEIVED:
@@ -48,10 +41,21 @@ function reducer (state = initialState, action) {
                     isLoading: false
                 }
             }
+        case REQUEST_SUMMONER_AND_MATCHLIST:
+            return {
+                selectedSummoner: {
+                    isLoading: true,
+                    data: null
+                },
+                matches: {
+                    isLoading: true,
+                    data: []
+                }
+            }
         case MATCHLIST_REQUESTED:
             return {
                 ...state,
-                matchListReference: {
+                matches: {
                     data: [],
                     isLoading: true
                 }
@@ -59,7 +63,7 @@ function reducer (state = initialState, action) {
         case MATCHLIST_RECEIVED:
             return {
                 ...state,
-                matchListReference: {
+                matches: {
                     data: action.matchlist,
                     isLoading: false
                 }
