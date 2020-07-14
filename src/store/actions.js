@@ -5,11 +5,15 @@ import {
 } from '../riot-api.layer'
 
 
-// Actions for summoner data
+// Action constants
 export const SUMMONER_REQUESTED = 'SUMMONER_REQUESTED'
 export const SUMMONER_RECEIVED = 'SUMMONER_RECEIVED'
 export const REQUEST_SUMMONER_AND_MATCHLIST = 'REQUEST_SUMMONER_AND_MATCHLIST'
+export const MATCHLIST_REQUESTED = 'MATCHLIST_REQUESTED'
+export const MATCHLIST_RECEIVED = 'MATCHLIST_RECEIVED'
 
+
+// Synchronous action creators
 function requestSummoner(name) {
     return {
         type: SUMMONER_REQUESTED
@@ -26,6 +30,30 @@ function receiveSummoner(summoner) {
 function requestSummonerAndMatchList() {
     return {
         type: REQUEST_SUMMONER_AND_MATCHLIST
+    }
+}
+
+function requestMatchList() {
+    return {
+        type: MATCHLIST_REQUESTED
+    }
+}
+
+function receiveMatchList(matchlist) {
+    return {
+        type: MATCHLIST_RECEIVED,
+        matchlist: matchlist
+    }
+}
+
+
+// Async action creators
+export function fetchMatchList(accountId) {
+    return function(dispatch) {
+        dispatch(requestMatchList())
+        return getMatchList(accountId)
+            .then(response => response.data.matches)
+            .then(matchlist => dispatch(receiveMatchList(matchlist)))
     }
 }
 
@@ -59,70 +87,23 @@ export function fetchSummonerAndMatchList(name) {
         const matchList = await getMatchList(summoner.accountId)
             .then(response => response.data.matches)
             .then(matchList => {
+                dispatch(receiveMatchList(matchList))
                 return matchList
             })
 
-            for(let i = 0; i < 10; i++) {
-                let match = await getMatch(matchList[i].gameId)
-                .then(response => {
-                    return response.data
-                })
-                matchList[i] = {
-                    ...matchList[i],
-                    ...match
-                }
+        // Update first 10 matches in matchlist with
+        // additional match information
+        for(let i = 0; i < 10; i++) {
+            let match = await getMatch(matchList[i].gameId)
+            .then(response => {
+                return response.data
+            })
+            matchList[i] = {
+                ...matchList[i],
+                ...match
             }
+        }
             
-        console.log(matchList)
         dispatch(receiveMatchList(matchList))
-    }
-}
-
-
-
-// Actions for match list data
-export const MATCHLIST_REQUESTED = 'MATCHLIST_REQUESTED'
-export const MATCHLIST_RECEIVED = 'MATCHLIST_RECEIVED'
-
-function requestMatchList() {
-    return {
-        type: MATCHLIST_REQUESTED
-    }
-}
-
-function receiveMatchList(matchlist) {
-    return {
-        type: MATCHLIST_RECEIVED,
-        matchlist: matchlist
-    }
-}
-
-export function fetchMatchList(accountId) {
-    return function(dispatch) {
-        dispatch(requestMatchList())
-        return getMatchList(accountId)
-            .then(response => response.data.matches)
-            .then(matchlist => dispatch(receiveMatchList(matchlist)))
-    }
-}
-
-
-
-// Actions for individual match data
-export const REQUEST_MATCH = 'REQUEST_MATCH'
-export const RECEIVE_MATCH = 'RECEIVE_MATCH'
-
-function receiveMatch(match) {
-    return {
-        type: RECEIVE_MATCH,
-        action: match
-    }
-}
-
-function fetchMatchDetail(gameId) {
-    return function(dispatch) {
-        // dispatch(requestMatch())
-        return getMatch(gameId)
-            .then(response => console.log)
     }
 }

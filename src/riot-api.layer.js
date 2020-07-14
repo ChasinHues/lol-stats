@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_KEY = 'RGAPI-a5530ca2-5f44-4b64-9ee3-0d97af7ed5ea'
+const API_KEY = 'RGAPI-4879a798-2c31-47b8-8eb9-0b5eacd39958'
 const BASE_URL = 'https://oc1.api.riotgames.com'
 const PROXY = 'https://cors-anywhere.herokuapp.com/'
 
