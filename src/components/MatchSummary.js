@@ -1,17 +1,6 @@
 import React from 'react'
 import * as championsData from '../champions.json'
-import AvatarImage from './AvatarImage'
-
-// const match = {
-//     champion: 1,
-//     gameId: 302317452,
-//     lane: "TOP",
-//     platformId: "OC1",
-//     queue: 450,
-//     role: "DUO_SUPPORT",
-//     season: 13,
-//     timestamp: 1588421961968
-// }
+import { Avatar } from 'antd'
 
 const championsObj = championsData.default.data
 
@@ -23,8 +12,10 @@ function MatchSummary(props) {
     })
 
     return (
-        <div className="flex">
-            <AvatarImage src={`http://ddragon.leagueoflegends.com/cdn/10.14.1/img/champion/${champion.id}.png`} />
+        <div className="flex items-center">
+            <Avatar 
+                size={64}
+                src={`http://ddragon.leagueoflegends.com/cdn/10.14.1/img/champion/${champion.id}.png`} />
             <div>{champion.name}</div>
         </div>
     )

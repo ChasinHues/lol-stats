@@ -5,16 +5,22 @@ import HomePage from './pages/HomePage'
 import SummonerSearchPage from './pages/SummonerSearchPage'
 import SummonerStatisticsPage from './pages/SummonerStatisticsPage'
 
+import { Layout } from 'antd'
+
+const { Content } = Layout
+
 function App() {
   return (
-    <div className="bg-gray-100">
-      <Router>
+    <Router>
+      <Layout>
         <Header />
-        <Route path="/" exact component={HomePage} />
-        <Route path="/summoner" exact component={SummonerSearchPage} />
-        <Route path="/summoner/:summonerName" component={SummonerStatisticsPage} />
-      </Router>
-    </div>
+        <Content>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/summoner" exact component={SummonerSearchPage} />
+          <Route path="/summoner/:summonerName" component={SummonerStatisticsPage} />
+        </Content>
+      </Layout>
+    </Router>
   );
 }
 

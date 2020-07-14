@@ -1,6 +1,6 @@
 import React from 'react'
 import SummonerSearch from '../components/SummonerSearch'
-import Card from '../components/Card'
+import { Card } from 'antd'
 
 function SummonerSearchPage() {
     return (

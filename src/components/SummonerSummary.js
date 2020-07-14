@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Card from './Card'
+import { Card } from 'antd'
 import Loading from './Loading'
 
 //http://ddragon.leagueoflegends.com/cdn/10.14.1/img/profileicon/${getSummoner.profileIconId}.png

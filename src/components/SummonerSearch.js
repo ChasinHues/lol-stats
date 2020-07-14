@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import LsTextInput from '../components/LsTextInput'
-import LsButton from '../components/LsButton'
+import { Button, Input } from 'antd'
 
 function SummonerSearch() {
     let [summonerName, setSummonerName] = useState('')
@@ -27,12 +26,12 @@ function SummonerSearch() {
     }
 
     return (
-        <div>
-            <LsTextInput 
+        <div className="flex">
+            <Input 
                 onChange={handleChange}
                 onKeyPress={handleKeyPress}
                 value={summonerName} />
-            <LsButton handleClick={handleClick}>Search</LsButton>
+            <Button onClick={handleClick}>Search</Button>
         </div>
     )
 }
