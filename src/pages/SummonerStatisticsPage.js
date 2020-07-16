@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchSummonerAndMatchList } from '../store/actions'
 import SummonerSummary from '../components/SummonerSummary'
 import SummonerStatistics from '../components/SummonerStatistics'
+import { Row, Col } from 'antd'
 
 function SummonerStatisticsPage({ match, dispatch }) {
 
@@ -12,10 +13,14 @@ function SummonerStatisticsPage({ match, dispatch }) {
     })
 
     return (
-        <div className="flex mx-auto w-3/4">
-            <SummonerSummary />
-            <SummonerStatistics />
-        </div>
+        <Row>
+            <Col flex="0 0 200px">
+                <SummonerSummary />
+            </Col>
+            <Col flex="1 1 auto">
+                <SummonerStatistics />
+            </Col>
+        </Row>
     )
 }
 
