@@ -7,18 +7,14 @@ import SummonerStatisticsPage from './pages/SummonerStatisticsPage'
 
 import { Layout } from 'antd'
 
-const { Content } = Layout
-
 function App() {
   return (
     <Router>
       <Layout>
         <Header />
-        <Content>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/summoner" exact component={SummonerSearchPage} />
-          <Route path="/summoner/:summonerName" component={SummonerStatisticsPage} />
-        </Content>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/summoners" exact component={SummonerSearchPage} />
+        <Route path="/summoners/:summonerName" component={SummonerStatisticsPage} />
       </Layout>
     </Router>
   );

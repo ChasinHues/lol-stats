@@ -1,19 +1,28 @@
 import React from 'react'
-import { Layout } from 'antd'
+import { Card } from 'antd'
 import MatchHistory from '../containers/MatchHistory'
-import SummonerSearch from './SummonerSearch'
+import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom'
 
 function SummonerStatistics() {
+    let { path, url } = useRouteMatch()
+
     return (
-        <Layout>
-            <Layout>
-                <h2>Search for a summoner:</h2>
-                <SummonerSearch />
-            </Layout>
-            <Layout>
-                <MatchHistory />
-            </Layout>
-        </Layout>
+        <Card>
+            <Switch>
+                <Route exact path={path}>
+                    <Redirect to={`${url}/overview`} />
+                </Route>
+                <Route path={`${path}/overview`}>
+                    overview
+                </Route>
+                <Route path={`${path}/matches`}>
+                    <MatchHistory />
+                </Route>
+                <Route path={`${path}/champions`}>
+                    champions
+                </Route>
+            </Switch>
+        </Card>
     )
 }
 

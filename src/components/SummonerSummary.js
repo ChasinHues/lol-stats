@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Layout } from 'antd'
+import { Card } from 'antd'
 import Loading from './Loading'
 
 //http://ddragon.leagueoflegends.com/cdn/10.14.1/img/profileicon/${getSummoner.profileIconId}.png
@@ -24,12 +24,12 @@ function SummonerSummary({ summoner, isLoading }) {
     }
 
     return (
-        <Layout>
+        <Card>
             {isLoading && <Loading />}
             {profileImage}
             {summonerName}
             {summonerLevel}
-        </Layout>
+        </Card>
     )
 }
 

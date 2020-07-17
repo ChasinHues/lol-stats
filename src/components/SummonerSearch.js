@@ -8,7 +8,7 @@ function SummonerSearch() {
 
     function handleSummonerSearch(name) {
         const urlEncodedName = encodeURI(name)
-        history.push('/summoner/' + urlEncodedName)
+        history.push('/summoners/' + urlEncodedName)
     }
 
     function handleChange(e) {
