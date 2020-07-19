@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+import summoner from './summoner-rukafera'
+import matches from './matchList.json'
+import match from './match-gameId-290984893.json'
+
+
 const API_KEY = 'RGAPI-c234f21f-dd76-4467-acbc-a45cafaf21ca'
 const BASE_URL = 'https://oc1.api.riotgames.com'
 const PROXY = 'https://cors-anywhere.herokuapp.com/'
@@ -14,7 +19,10 @@ export function getSummonerByName(name) {
         }
     }
     
-    return axios(config)
+    // return axios(config)
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve({data: summoner}), 1000)
+    })
 }
 
 export function getMatchList(accountId) {
@@ -27,7 +35,10 @@ export function getMatchList(accountId) {
         }
     }
     
-    return axios(config)
+    // return axios(config)
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve({data: matches}), 1000)
+    })
 }
 
 export function getMatch(matchId) {
@@ -40,7 +51,10 @@ export function getMatch(matchId) {
         }
     }
     
-    return axios(config)
+    // return axios(config)
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve({data: summoner}), 500)
+    })
 }
 
 export function getMachTimeline(matchId) {

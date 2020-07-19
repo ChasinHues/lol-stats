@@ -11,11 +11,11 @@ function SummonerStatisticsPage({ match, dispatch }) {
 
     useEffect(() => {
         const summonerName = match.params.summonerName
-        // dispatch(fetchSummonerAndMatchList(summonerName))
+        dispatch(fetchSummonerAndMatchList(summonerName))
     })
 
     return (
-        <Layout className="max-w-screen-xl m-6 w-full">
+        <Layout className="max-w-screen-xl mx-auto p-6 w-full">
             <Row gutter={24}>
                 <Col flex="0 0 240px">
                     <SummonerSummary />
