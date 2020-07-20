@@ -10,10 +10,11 @@ const { Title } = Typography
 const mapState = (state) => {
     return {
         matches: state.matches,
+        selectedSummoner: state.selectedSummoner
     }
 }
 
-function MatchHistory({ matches }) {
+function MatchHistory({ matches, selectedSummoner }) {
     const [visibleMatches, setVisibleMatches] = useState([])
     
     useEffect(() => {
@@ -29,7 +30,7 @@ function MatchHistory({ matches }) {
             <Title>Match history</Title>
             {matches.isLoading && <Loading />}
             <div>
-                {visibleMatches.map(match => <MatchSummary key={match.gameId} match={match} /> )}
+                {visibleMatches.map(match => <MatchSummary key={match.gameId} match={match} selectedSummonerId={selectedSummoner.data.id} /> )}
             </div>
             <div>
                 <Button
