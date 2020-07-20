@@ -1,7 +1,8 @@
 import { 
     getSummonerByName, 
     getMatchList, 
-    getMatch
+    getMatch,
+    getChampions
 } from '../riot-api.layer'
 
 
@@ -11,6 +12,8 @@ export const SUMMONER_RECEIVED = 'SUMMONER_RECEIVED'
 export const REQUEST_SUMMONER_AND_MATCHLIST = 'REQUEST_SUMMONER_AND_MATCHLIST'
 export const MATCHLIST_REQUESTED = 'MATCHLIST_REQUESTED'
 export const MATCHLIST_RECEIVED = 'MATCHLIST_RECEIVED'
+export const CHAMPIONS_REQUESTED = 'CHAMPIONS_REQUESTED'
+export const CHAMPIONS_RECEIVED = 'CHAMPIONS_RECEIVED'
 
 
 // Synchronous action creators
@@ -43,6 +46,19 @@ function receiveMatchList(matchlist) {
     return {
         type: MATCHLIST_RECEIVED,
         matchlist: matchlist
+    }
+}
+
+function requestChampions() {
+    return {
+        type: CHAMPIONS_REQUESTED
+    }
+}
+
+function receiveChampions(champions) {
+    return {
+        type: CHAMPIONS_RECEIVED,
+        champions: champions
     }
 }
 
@@ -87,7 +103,7 @@ export function fetchSummonerAndMatchList(name) {
         const matchList = await getMatchList(summoner.accountId)
             .then(response => response.data.matches)
             .then(matchList => {
-                dispatch(receiveMatchList(matchList))
+                // dispatch(receiveMatchList(matchList))
                 return matchList
             })
 
@@ -96,7 +112,10 @@ export function fetchSummonerAndMatchList(name) {
         for(let i = 0; i < 10; i++) {
             let match = await getMatch(matchList[i].gameId)
             .then(response => {
-                return response.data
+                return {
+                    ...response.data,
+
+                }
             })
             matchList[i] = {
                 ...matchList[i],
@@ -105,5 +124,14 @@ export function fetchSummonerAndMatchList(name) {
         }
             
         dispatch(receiveMatchList(matchList))
+    }
+}
+
+export function fetchChampions() {
+    return async function(dispatch) {
+        dispatch(requestChampions())
+        const champions = await getChampions()
+            .then(response => response.data.data)
+        dispatch(receiveChampions(champions))
     }
 }

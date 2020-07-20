@@ -3,7 +3,9 @@ import {
     SUMMONER_RECEIVED,
     MATCHLIST_REQUESTED, 
     MATCHLIST_RECEIVED,
-    REQUEST_SUMMONER_AND_MATCHLIST
+    REQUEST_SUMMONER_AND_MATCHLIST,
+    CHAMPIONS_REQUESTED,
+    CHAMPIONS_RECEIVED
 } from './actions'
 
 // REDUCERS
@@ -16,6 +18,10 @@ const initialState = {
     matches: {
         isLoading: false,
         data: []
+    },
+    champions: {
+        isLoading: false,
+        data: null
     }
 }
 
@@ -66,6 +72,22 @@ function reducer (state = initialState, action) {
                 matches: {
                     data: action.matchlist,
                     isLoading: false
+                }
+            }
+        case CHAMPIONS_REQUESTED:
+            return {
+                ...state,
+                champions: {
+                    isLoading: true,
+                    data: null
+                }
+            }
+        case CHAMPIONS_RECEIVED:
+            return {
+                ...state,
+                champions: {
+                    isLoading: false,
+                    data: action.champions
                 }
             }
         default:

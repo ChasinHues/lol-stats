@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { fetchSummonerAndMatchList } from '../store/actions'
+import { fetchSummonerAndMatchList, fetchChampions } from '../store/actions'
 import SummonerSummary from '../components/SummonerSummary'
 import SummonerStatistics from '../components/SummonerStatistics'
 import { Row, Col, Layout, Card } from 'antd'
 import { useRouteMatch, Link } from 'react-router-dom'
 
 function SummonerStatisticsPage({ match, dispatch }) {
-    let { path, url } = useRouteMatch()
+    let { url } = useRouteMatch()
 
     useEffect(() => {
         const summonerName = match.params.summonerName
         dispatch(fetchSummonerAndMatchList(summonerName))
+        dispatch(fetchChampions())
     })
 
     return (

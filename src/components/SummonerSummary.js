@@ -18,7 +18,7 @@ function SummonerSummary({ summoner, isLoading }) {
     let summonerLevel = ''
 
     if(summoner !== null) {
-        profileImage = <img src={`http://ddragon.leagueoflegends.com/cdn/10.14.1/img/profileicon/${summoner.profileIconId}.png`} />
+        profileImage = <img src={`http://ddragon.leagueoflegends.com/cdn/10.14.1/img/profileicon/${summoner.profileIconId}.png`} alt='Summoner profile' />
         summonerName = <h2>{summoner.name}</h2>
         summonerLevel = <p>Level {summoner.summonerLevel}</p>
     }
